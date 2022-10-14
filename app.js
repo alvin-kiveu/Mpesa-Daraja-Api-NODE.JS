@@ -111,6 +111,84 @@ app.get("/stkpush", (req, res) => {
     .catch(console.log);
 });
 
+//REGISTER URL FOT C2B
+
+app.get("/registerurl", (req, resp) => {
+  getAccessToken()
+    .then((accessToken) => {
+      let url = "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl";
+      let auth = "Bearer " + accessToken;
+
+      request(
+        {
+          url: url,
+          method: "POST",
+          headers: {
+            Authorization: auth,
+          },
+          json: {
+            ShortCode: "600383",
+            ResponseType: "Complete",
+            ConfirmationURL: "http://example.com/confirmation",
+            ValidationURL: "http://example.com/validation",
+          },
+        },
+        function (error, response, body) {
+          if (error) {
+            console.log(error);
+          }
+          resp.status(200).json(body);
+        }
+      );
+    })
+    .catch(console.log);
+});
+
+app.post("/confirmation", (req, res) => {
+  console.log("All transaction  will be send to this url");
+  console.log(req.body);
+});
+
+app.post("/validation", (req, resp) => {
+  console.log("Validating payment");
+  console.log(req.body);
+});
+//STIMUTATE TRANSACTION TO SEE IF URL IS REGISTERED SUCCESSULY
+app.get("/simulate", (req, res) => {
+  getAccessToken()
+    .then((accessToken) => {
+      let url = "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/simulate";
+      let auth = "Bearer " + req.access_token;
+
+      request(
+        {
+          url: url,
+          method: "POST",
+          headers: {
+            Authorization: auth,
+          },
+          json: {
+            ShortCode: "600383",
+            CommandID: "CustomerPayBillOnline",
+            Amount: "100",
+            Msisdn: "254708374149",
+            BillRefNumber: "TestAPI",
+          },
+        },
+        function (error, response, body) {
+          if (error) {
+            console.log(error);
+          } else {
+            res.status(200).json(body);
+          }
+        }
+      );
+    })
+    .catch(console.log);
+});
+
+// END OF C2B AND REGITER URL WITH NODE JS
+
 //GETING ACCESS TOKEN FUNCTION
 function getAccessToken() {
   const consumer_key = "TWCjG1tc4iXI3TQRgzUdVnkpXmR5G65z";
