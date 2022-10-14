@@ -134,7 +134,6 @@ function getAccessToken() {
         if (error) {
           reject(error);
         } else {
-          // console.log("😀 Your access token is" + jsonBody.access_token);
           const accessToken = jsonBody.access_token;
           response(accessToken);
         }
