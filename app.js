@@ -43,8 +43,7 @@ app.get("/access_token", (req, res) => {
     .catch(console.log);
 });
 
-//STK PUSH
-
+//TRIGER AN STK PUSH
 app.get("/stkpush", (req, res) => {
   getAccessToken()
     .then((accessToken) => {
