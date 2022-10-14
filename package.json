@@ -1,0 +1,22 @@
+{
+  "name": "mpesa-api",
+  "version": "1.0.0",
+  "description": "Mpesa Api in node js",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "Mpesa"
+  ],
+  "author": "Alvin Kiveu",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
