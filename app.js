@@ -3,6 +3,7 @@ const app = express();
 const http = require("http");
 const bodyParser = require("body-parser");
 const request = require("request");
+const moment = require("moment");
 
 const port = 3000;
 const hostname = "localhost";
@@ -11,27 +12,8 @@ const server = http.createServer(app);
 
 app.get("/", (req, res) => {
   res.send("MPESA DARAJA API WITH NODE JS BY UMESKIA SOFTWARES");
-  //TIME STAMP FORMART YEAR+MONTH+DATE+HOUR+MINUTE+SECOND
-  var date = new Date();
-  var month = date.getMonth() + 1;
-  let timestamp =
-    date.getFullYear() +
-    "" +
-    "" +
-    month +
-    "" +
-    "" +
-    date.getDate() +
-    "" +
-    "" +
-    date.getHours() +
-    "" +
-    "" +
-    date.getMinutes() +
-    "" +
-    "" +
-    date.getSeconds();
-  console.log(timestamp);
+  var timeStamp = moment().format("YYYYMMDDHHmmss");
+  console.log(timeStamp);
 });
 
 //ACCESS TOKEN
@@ -50,25 +32,7 @@ app.get("/stkpush", (req, res) => {
       const url =
           "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
         auth = "Bearer " + accessToken;
-      var date = new Date();
-      var month = date.getMonth() + 1;
-      let timestamp =
-        date.getFullYear() +
-        "" +
-        "" +
-        month +
-        "" +
-        "" +
-        date.getDate() +
-        "" +
-        "" +
-        date.getHours() +
-        "" +
-        "" +
-        date.getMinutes() +
-        "" +
-        "" +
-        date.getSeconds();
+      var timestamp = moment().format("YYYYMMDDHHmmss");
       const password = new Buffer.from(
         "174379" +
           "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919" +
@@ -158,7 +122,7 @@ app.get("/simulate", (req, res) => {
   getAccessToken()
     .then((accessToken) => {
       let url = "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/simulate";
-      let auth = "Bearer " + req.access_token;
+      let auth = "Bearer " + accessToken;
 
       request(
         {
