@@ -55,6 +55,15 @@ How to contact me
 9. Website: https://umeskiasoftwares.com
 
 
+Support us with the one of following ways
+
+1. Star this project
+
+2. Share this project
+
+3. Follow me on GitHub
+
+4. Tip me via Mpesa Till Number: 59 26 541
 
 
 
