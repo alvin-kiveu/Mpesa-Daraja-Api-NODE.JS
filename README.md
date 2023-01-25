@@ -1,5 +1,7 @@
 # Mpesa-Daraja-Api-NODE.JS
 
+Here is the youtube video link: https://youtube.com/playlist?list=PLL9VrPrscsUYv0BGf430fxiHEw5E2gdDV
+
 How to install this projet
 
 1. Clone the project

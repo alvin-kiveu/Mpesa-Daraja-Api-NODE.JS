@@ -105,12 +105,12 @@ app.get("/registerurl", (req, resp) => {
     .catch(console.log);
 });
 
-app.post("/confirmation", (req, res) => {
+app.get("/confirmation", (req, res) => {
   console.log("All transaction  will be send to this url");
   console.log(req.body);
 });
 
-app.post("/validation", (req, resp) => {
+app.get("/validation", (req, resp) => {
   console.log("Validating payment");
   console.log(req.body);
 });
