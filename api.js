@@ -4,7 +4,6 @@ const axios = require("axios");
 const fs = require("fs");
 const moment = require("moment");
 
-
 // Sample API route
 router.get('/api/home', (req, res) => {
   res.json({ message: 'This is a sample API route.' });
@@ -20,8 +19,8 @@ router.get("/api/access_token", (req, res) => {
 });
 
 async function getAccessToken() {
-  const consumer_key = "B2JNQ0jXldRaVNrSNf7PIhZCw8u6DUAE"; // REPLACE IT WITH YOUR CONSUMER KEY
-  const consumer_secret = "vmDhsm56BY5Afqva"; // REPLACE IT WITH YOUR CONSUMER SECRET
+  const consumer_key = ""; // REPLACE IT WITH YOUR CONSUMER KEY
+  const consumer_secret = ""; // REPLACE IT WITH YOUR CONSUMER SECRET
   const url =
     "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials";
 
