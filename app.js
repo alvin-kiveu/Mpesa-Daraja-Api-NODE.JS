@@ -94,9 +94,9 @@ app.get("/stkpush", (req, res) => {
             Timestamp: timestamp,
             TransactionType: "CustomerPayBillOnline",
             Amount: "10",
-            PartyA: "254768168060",
+            PartyA: "", //phone number to receive the stk push
             PartyB: "174379",
-            PhoneNumber: "254768168060",
+            PhoneNumber: "",
             CallBackURL: "https://dd3d-105-160-22-207.ngrok-free.app/callback",
             AccountReference: "UMESKIA PAY",
             TransactionDesc: "Mpesa Daraja API stk push test",
@@ -192,7 +192,7 @@ app.get("/b2curlrequest", (req, res) => {
             CommandID: "PromotionPayment",
             Amount: "1",
             PartyA: "600996",
-            PartyB: "254768168060",
+            PartyB: "",//phone number to receive the stk push
             Remarks: "Withdrawal",
             QueueTimeOutURL: "https://mydomain.com/b2c/queue",
             ResultURL: "https://mydomain.com/b2c/result",
