@@ -1,3 +1,10 @@
+/*
+  Author: Alvin Kiveu
+  Description: Mpesa Daraja API with Node JS
+  Date: 23/10/2023
+
+*/
+
 const express = require("express");
 const app = express();
 const http = require("http");
@@ -6,6 +13,7 @@ const axios = require("axios"); // Import 'axios' instead of 'request'
 const moment = require("moment");
 const apiRouter = require('./api');
 const cors = require("cors");
+const fs = require("fs");
 
 
 const port = 5000;
@@ -23,7 +31,6 @@ async function getAccessToken() {
   const consumer_secret = ""; // REPLACE IT WITH YOUR CONSUMER SECRET
   const url =
     "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials";
-
   const auth =
     "Basic " +
     new Buffer.from(consumer_key + ":" + consumer_secret).toString("base64");
@@ -34,7 +41,10 @@ async function getAccessToken() {
         Authorization: auth,
       },
     });
-    const accessToken = response.data.access_token;
+   
+    const dataresponse = response.data;
+    // console.log(data);
+    const accessToken = dataresponse.access_token;
     return accessToken;
   } catch (error) {
     throw error;
@@ -46,6 +56,7 @@ app.get("/", (req, res) => {
   var timeStamp = moment().format("YYYYMMDDHHmmss");
   console.log(timeStamp);
 });
+
 
 //ACCESS TOKEN ROUTE
 app.get("/access_token", (req, res) => {
@@ -78,11 +89,11 @@ app.get("/stkpush", (req, res) => {
             Password: password,
             Timestamp: timestamp,
             TransactionType: "CustomerPayBillOnline",
-            Amount: "1",
+            Amount: "10",
             PartyA: "254768168060",
             PartyB: "174379",
             PhoneNumber: "254768168060",
-            CallBackURL: "https://umeskiasoftwares.com/umswifi/callback",
+            CallBackURL: "https://dd3d-105-160-22-207.ngrok-free.app/callback",
             AccountReference: "UMESKIA PAY",
             TransactionDesc: "Mpesa Daraja API stk push test",
           },
@@ -101,6 +112,21 @@ app.get("/stkpush", (req, res) => {
         });
     })
     .catch(console.log);
+});
+
+//STK PUSH CALLBACK ROUTE
+app.post("/callback", (req, res) => {
+  console.log("STK PUSH CALLBACK");
+  const CheckoutRequestID = req.body.Body.stkCallback.CheckoutRequestID;
+  const ResultCode = req.body.Body.stkCallback.ResultCode;
+  var json = JSON.stringify(req.body);
+  fs.writeFile("stkcallback.json", json, "utf8", function (err) {
+    if (err) {
+      return console.log(err);
+    }
+    console.log("STK PUSH CALLBACK JSON FILE SAVED");
+  });
+  console.log(req.body);
 });
 
 // REGISTER URL FOR C2B

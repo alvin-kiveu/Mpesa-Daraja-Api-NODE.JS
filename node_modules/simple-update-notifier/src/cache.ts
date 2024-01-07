@@ -8,7 +8,10 @@ const configDir =
   path.join(homeDirectory, '.config', 'simple-update-notifier');
 
 const getConfigFile = (packageName: string) => {
-  return path.join(configDir, `${packageName}.json`);
+  return path.join(
+    configDir,
+    `${packageName.replace('@', '').replace('/', '__')}.json`
+  );
 };
 
 export const createConfigDir = () => {

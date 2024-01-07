@@ -4,4 +4,5 @@ export interface IUpdate {
   shouldNotifyInNpmScript?: boolean;
   distTag?: string;
   alwaysRun?: boolean;
+  debug?: boolean;
 }

@@ -1,7 +1,7 @@
 import simpleUpdateNotifier from '.';
 import hasNewVersion from './hasNewVersion';
 
-const consoleSpy = jest.spyOn(console, 'log');
+const consoleSpy = jest.spyOn(console, 'error');
 
 jest.mock('./hasNewVersion', () => jest.fn().mockResolvedValue('2.0.0'));
 
